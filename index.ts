@@ -7,19 +7,12 @@ async function callImportDinamicaly(url:string,data:any={}) {
     
     try 
     {
-        if(url != null || url != '' || url != 0)
-        {
-            let obj = await import(url);
-            let name = url.split('/').pop() || 'any';
-    
-            let clss = new obj[name](data);
-    
-            return clss;
-        }
-        else
-        {
-            throw console.error('url incorrecta!');
-        }
+        let obj = await import(url);
+        let name = url.split('/').pop()?.split('.').pop() || 'any';
+
+        let clss = new obj[name](data);
+
+        return clss;
     }
     catch(err)
     {
